@@ -15,22 +15,22 @@ export const getAuthToken = () => authToken;
 
 export const loginAgent = async (agentCode) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch(`${API_BASE_URL}/auth/login/secure`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ agentCode })
     });
 
     const data = await response.json();
-    
+
     if (!response.ok) {
       throw new Error(data.error || 'Login failed');
     }
-    
+
     if (data.data?.token) {
       setAuthToken(data.data.token);
     }
-    
+
     return data;
   } catch (error) {
     console.error('Login API Error:', error);
